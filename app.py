@@ -14,15 +14,16 @@ def health():
 def main() -> Response:
 
     token = request.form.get('token', None)
-    channel = request.form.get('channel_name', None)
+    channel = request.form.get('channel_id', None)
 
     if token == os.environ['VERIFICATION_TOKEN']:
         data = jsonify(text="You're a towel.",
                        token=os.environ['VERIFICATION_TOKEN'],
                        response_type="in_channel",
-                       channel=f"#{channel}")
-        r = Response(data, status=200, mimetype=DEFAULT)
-        return r
+                       channel=channel,
+                       mimetype=DEFAULT)
+        data.status_code = 200
+        return data
     else:
         return Response("", status=401, mimetype=DEFAULT)
 
