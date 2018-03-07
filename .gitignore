@@ -1,1 +1,6 @@
 venv/*
+setenv.sh
+.env
+*.swp
+__pycache__/
+*.py[cod]
